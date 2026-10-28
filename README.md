@@ -8,23 +8,24 @@ With npm run deploy you can get the url of the project, configuring the AIM user
 
 # Original Test
 
-Requerimientos funcionales:
-● Debe tener endpoints para realizar el CRUD y búsqueda de alumnos.
-Requerimientos no funcionales:
-● Crear API utilizando los frameworks Serverless con integración a AWS + NestJS.
-● Debe estar alojado en un repositorio público de GitHub (cuidado de no exponer las
-credenciales).
-● El proyecto debe estar desarrollado con TypeScript.
-● Debe tener pruebas unitarias y opcionalmente pruebas E2E.
-● Debe tener un endpoint para acceder a la documentación con Swagger.
-● La API debe tener endpoints privados (apiKey).
-● Manejar CORS.
-● Los datos deben ser almacenados en una tabla de DynamoDB.
-● La API debe tener validaciones de requests.
-● Considerar el manejo de errores y exposición de los mismos en los responses.
-● Un README claro que contenga información relevante para el levantamiento del
-proyecto.
-● Una demo funcionando de todo el proyecto (enviarnos la URL y apiKeys necesarias).
+### Funcionales
+
+- Debe tener endpoints para realizar el CRUD y búsqueda de alumnos.
+
+### No funcionales
+
+- Crear API utilizando los frameworks Serverless con integración a AWS + NestJS.
+- Debe estar alojado en un repositorio público de GitHub (cuidado de no exponer las credenciales).
+- El proyecto debe estar desarrollado con TypeScript.
+- Debe tener pruebas unitarias y opcionalmente pruebas E2E.
+- Debe tener un endpoint para acceder a la documentación con Swagger.
+- La API debe tener endpoints privados (apiKey).
+- Manejar CORS.
+- Los datos deben ser almacenados en una tabla de DynamoDB.
+- La API debe tener validaciones de requests.
+- Considerar el manejo de errores y exposición de los mismos en los responses.
+- Un README claro que contenga información relevante para el levantamiento del proyecto.
+- Una demo funcionando de todo el proyecto (enviarnos la URL y apiKeys necesarias).
 
 # How I solved it
 
