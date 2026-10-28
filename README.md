@@ -164,8 +164,6 @@ You can see the images and understand
 ![writing API key](images/Untitled_1.jpg)
 ![API request example](images/Untitled_2.jpg)
 
-```
-
 ## Project structure
 
 ```
