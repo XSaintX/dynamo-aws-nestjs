@@ -1,0 +1,84 @@
+service: alumnos-api
+frameworkVersion: '4'
+
+# Compilamos con `nest build` (tsc) porque esbuild no emite los metadatos
+# de decoradores que NestJS necesita para la inyección de dependencias.
+build:
+  esbuild: false
+
+package:
+  patterns:
+    - '!src/**'
+    - '!test/**'
+    - '!.env*'
+    - 'dist/**'
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  region: us-east-1
+  stage: ${opt:stage, 'dev'}
+  memorySize: 512
+  timeout: 15
+  environment:
+    TABLE_NAME: ${self:service}-${self:provider.stage}-alumnos
+    STAGE: ${self:provider.stage}   
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+            - dynamodb:GetItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:Scan
+            - dynamodb:Query
+          Resource:
+            - !GetAtt AlumnosTable.Arn
+            - !Sub '${AlumnosTable.Arn}/index/*'
+  apiGateway:
+    apiKeys:
+      - name: ${self:service}-${self:provider.stage}-key
+    usagePlan:
+      quota:
+        limit: 5000
+        period: MONTH
+      throttle:
+        burstLimit: 20
+        rateLimit: 10
+
+functions:
+  api:
+    handler: dist/lambda.handler
+    events:
+      - http:
+          method: ANY
+          path: docs
+      - http:
+          method: ANY
+          path: docs/json
+      - http:
+          method: ANY
+          path: /{proxy+}
+          private: true
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - x-api-key
+              - Authorization
+
+resources:
+  Resources:
+    AlumnosTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.TABLE_NAME}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: alumnoId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: alumnoId
+            KeyType: HASH
