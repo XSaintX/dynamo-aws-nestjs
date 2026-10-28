@@ -161,8 +161,8 @@ Routes are served under the stage: `<YOUR_URL>/alumnos`.
 
 ### How it works
 You can see the images and understand
-(images/Untitled_1.jpg)
-(images/Untitled_2.jpg)
+![writing API key](images/Untitled_1.jpg)
+![API request example](images/Untitled_2.jpg)
 
 ```
 
